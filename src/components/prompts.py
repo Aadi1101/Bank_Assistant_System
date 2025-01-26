@@ -1,7 +1,7 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
 from src.utils import query_database
-
+MESSAGES = "{messages}"
 class BankAssistantPrompts:
     def __init__(self):
         self.llm = ChatGroq(model="llama3-70b-8192")
@@ -49,7 +49,7 @@ class BankAssistantPrompts:
             - Return "TRUE" or "FALSE" depending on whether the query requires database access.
             """
             base_query = base_query.format(user_id=user_id)
-        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder","{messages}")])
+        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder",MESSAGES)])
         base_query_interaction = base_prompt | self.llm
         result = base_query_interaction.invoke({"messages":[("user",user_query)]}).content
         response = self.choose_action(user_query=user_query,bool_response=result,user_id=user_id)
@@ -86,7 +86,7 @@ class BankAssistantPrompts:
         7. Skip queries related to Sandbox technologies and reply back with "will get back to you soon!".
 
         """
-        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder","{messages}")])
+        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder",MESSAGES)])
         base_query_interaction = base_prompt | self.llm
         result = base_query_interaction.invoke({"messages":[("user",user_query)]}).content
         return result
@@ -141,7 +141,7 @@ class BankAssistantPrompts:
             - Only the SQL query fulfilling the user's request, ensuring it is scoped to the provided `user_id`.
             """
             base_query = base_query.format(user_id=user_id)
-        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder","{messages}")])
+        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder",MESSAGES)])
         base_query_interaction = base_prompt | self.llm
         result = base_query_interaction.invoke({"messages":[("user",user_query)]}).content
         return result
@@ -263,7 +263,7 @@ class BankAssistantPrompts:
             u.UserID;
 
         """
-        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder","{messages}")])
+        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder",MESSAGES)])
         base_query_interaction = base_prompt | self.llm
         result = base_query_interaction.invoke({"messages":[("user",sql_query)]}).content
         response = self.sql_action(sql_query=sql_query,bool_response=result)
@@ -291,7 +291,7 @@ class BankAssistantPrompts:
         4. Do not use any bold, italic, or underline formatting, just simple text.
         5. Strictly print only the output in well formatted manner and not the code from the backed.
         """
-        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder","{messages}")])
+        base_prompt = ChatPromptTemplate.from_messages([("system",base_query),("placeholder",MESSAGES)])
         base_query_interaction = base_prompt | self.llm
         result = base_query_interaction.invoke({"messages":[("user",sql_result)]}).content
         return result
