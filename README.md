@@ -48,7 +48,7 @@ This project is a banking assistant system built using Streamlit, Langchain, and
     DB_USER=your_database_user
     DB_PASSWORD=your_database_password
     DB_NAME=your_database_name
-    - `PROMPTS`: prompts
+    PROMPTS= prompts
     ```
 
 3. **Database**:
