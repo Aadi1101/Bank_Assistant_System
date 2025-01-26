@@ -6,4 +6,5 @@ sqlalchemy
 pymysql
 streamlit
 streamlit-authenticator
+python-dotenv
 -e .
