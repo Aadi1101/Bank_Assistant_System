@@ -1,0 +1,9 @@
+langgraph
+langchain-community
+langchain-groq
+mysql-connector-python
+sqlalchemy 
+pymysql
+streamlit
+streamlit-authenticator
+-e .
