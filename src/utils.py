@@ -1,13 +1,21 @@
+import os
 import mysql.connector
 from mysql.connector import Error
+from dotenv import load_dotenv
+load_dotenv()
+
+DB_HOST = os.getenv('DB_HOST')
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_NAME = os.getenv('DB_NAME')
 
 def db_connection():
     try:
         connection = mysql.connector.connect(
-            host='localhost',       # Replace with your MySQL host, e.g., '127.0.0.1'
-            user='root',   # Your MySQL username
-            password='1234', # Your MySQL password
-            database='bms'  # The database you want to connect to
+            host=DB_HOST,       # Replace with your MySQL host, e.g., '127.0.0.1'
+            user=DB_USER,   # Your MySQL username
+            password=DB_PASSWORD, # Your MySQL password
+            database=DB_NAME  # The database you want to connect to
         )
 
         if connection.is_connected():
