@@ -1,5 +1,5 @@
 from typing import List
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages # type: ignore
 
 def get_requirements(file_path:str)->List[str]:
     requirements = []
