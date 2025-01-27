@@ -19,7 +19,6 @@ def db_connection():
         )
 
         if connection.is_connected():
-            print("Connected to MySQL database")
             return connection
     except Exception as e:
         print(e)
@@ -31,7 +30,6 @@ def query_database(sql_query:str):
     cursor.execute(sql_query)
     for result in cursor.fetchall():
         result_list.append(result)
-    print(result)
     cursor.close()
     connection.close()
     return str(result_list)
@@ -40,16 +38,12 @@ def get_user_id(username: str):
     result = None
     connection = db_connection()  # Ensure this establishes a valid DB connection
     cursor = connection.cursor()
-
-    # Use a parameterized query to avoid SQL injection and quoting issues
     sql_query = 'SELECT UserID FROM Users WHERE Username = %s'
-
     try:
-        # Properly pass the username as a tuple
         cursor.execute(sql_query, (username,))
-        row = cursor.fetchone()  # Fetch a single result
+        row = cursor.fetchone()
         if row:
-            result = row[0]  # Extract the UserID from the result
+            result = row[0]
     except Exception as e:
         print(f"Error occurred while fetching user ID: {e}")
     finally:

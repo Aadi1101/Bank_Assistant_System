@@ -12,7 +12,9 @@ class BankAssistant:
             st.session_state.chat_history = [
                 AIMessage(
                     content="""
-                        Hello! I am a Bank Assistant. How may I help you?
+                        Welcome to your personalized Bank Assistant!\n
+                        I'm here to provide you with seamless, secure, and tailored support for all your financial needs. Whether it's checking balances, managing transactions, exploring loan options, or receiving smart investment recommendations, I've got you covered.
+                        How can I assist you today?"
                     """
                 )
             ]
